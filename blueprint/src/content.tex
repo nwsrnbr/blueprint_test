@@ -5,3 +5,229 @@
 % If you want to split the blueprint content into several files then
 % the current file can be a simple sequence of \input. Otherwise It
 % can start with a \section or \chapter for instance.
+
+\section{section1}
+
+\begin{definition}
+  \label{def:E8Lattice}
+  \lean{E8Lattice}
+  \leanok
+  \uses{def:IntegralLattice}
+  $E_8$格子とは，integralLatticeであって，even unimodularかつランクが$8$であるもののことである．
+\end{definition}
+
+\begin{theorem}
+  \label{thm:unique}
+  \lean{Mathlib.GroupTheory.IntegralLattice.E8.Basic.E8Lattice.unique}
+  \leanok
+  2つの$E_8$格子$\Lambda_1,\ \Lambda_2$は同型である．
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  sorry.
+\end{proof}
+
+\begin{definition}
+  \label{def:M0-M7}
+  \leanok
+  $E_8$のCartan行列を$M_0$，それを1行ずつ行基本変形していき(その過程の行列を$M_1, M_2, \ldots, M_6$とする)上三角にしたものを$M_7$とする：
+  \begin{gather}
+    M_0 :=
+    \begin{pmatrix}
+      2 & 0 & -1 & 0 & 0 & 0 & 0 & 0 \\
+      0 & 2 & 0 & -1 & 0 & 0 & 0 & 0 \\
+      -1 & 0 & 2 & -1 & 0 & 0 & 0 & 0 \\
+      0 & -1 & -1 & 2 & -1 & 0 & 0 & 0 \\
+      0 & 0 & 0 & -1 & 2 & -1 & 0 & 0 \\
+      0 & 0 & 0 & 0 & -1 & 2 & -1 & 0 \\
+      0 & 0 & 0 & 0 & 0 & -1 & 2 & -1 \\
+      0 & 0 & 0 & 0 & 0 & 0 & -1 & 2
+    \end{pmatrix},\\
+    M_7 :=
+    \begin{pmatrix}
+      2 & 0 & -1 & 0 & 0 & 0 & 0 & 0 \\
+      0 & 2 & 0 & -1 & 0 & 0 & 0 & 0 \\
+      0 & 0 & 3/2 & -1 & 0 & 0 & 0 & 0 \\
+      0 & 0 & 0 & 5/6 & -1 & 0 & 0 & 0 \\
+      0 & 0 & 0 & 0 & 4/5 & -1 & 0 & 0 \\
+      0 & 0 & 0 & 0 & 0 & 3/4 & -1 & 0 \\
+      0 & 0 & 0 & 0 & 0 & 0 & 2/3 & -1 \\
+      0 & 0 & 0 & 0 & 0 & 0 & 0 & 1/2
+    \end{pmatrix}.
+  \end{gather}
+\end{definition}
+
+\begin{lemma}
+  \label{lem:M7_upperTrianglar}
+  \lean{M7_upperTrianglar}
+  \leanok
+  $M_7$は上三角である．
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  \uses{def:M0-M7}
+  略．
+\end{proof}
+
+\begin{lemma}
+  \label{lem:M7_det}
+  \lean{M7_det}
+  \leanok
+  $\det M_7 = 1$である．
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  \uses{lem:M7_upperTrianglar, def:M0-M7}
+  補題~\ref{lem:M7_upperTrianglar}より，$M_7$の行列式は対角成分たちの積であるから
+  \begin{align}
+    \det M_7
+    &= 2 \cdot 2 \cdot (3 / 2) \cdot (5 / 6) \cdot (4 / 5) \cdot (3 / 4) \cdot (2 / 3) \cdot (1 / 2)\\
+    &= 1.
+  \end{align}
+\end{proof}
+
+\begin{theorem}
+  \label{thm:E8_det}
+  \lean{E8_det}
+  \leanok
+  $E_8$のCartan行列の行列式は$1$である．
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  \uses{def:M0-M7, lem:M7_det}
+  補題~\ref{lem:M7_det}より
+  \begin{equation}
+    (\textrm{求める行列式})
+    = \det M_0
+    = \det M_1
+    = \cdots
+    = \det M_7
+    = 1.
+  \end{equation}
+\end{proof}
+
+\begin{definition}
+  \label{def:B}
+  \lean{B}
+  \leanok
+  $B$を$E_8$のCartan行列$C \in \M_8(\Z)$から定まる双線型形式とする：
+  \begin{equation}
+    B(x, y) := \transpose{x} C y = \inner{x}{Cy} \qquad (\forall x, y \in \Z^8).
+  \end{equation}
+\end{definition}
+
+\begin{lemma}
+  \label{lem:inner_self_calc}
+  \lean{inner_self_calc}
+  \leanok
+  任意の$x \in \Z^8$に対し，次が成り立つ：
+  \begin{equation}
+    \begin{split}
+      B(x, x) ={}& 2 (x_0^2 + x_1^2 + x_2^2 + x_3^2 + x_4^2 + x_5^2 + x_6^2 + x_7^2\\
+      &- (x_0 x_2 + x_1 x_3 + x_2 x_3 + x_3 x_4 + x_4 x_5 + x_5 x_6 + x_6 x_7))
+    \end{split}
+  \end{equation}
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  \uses{def:B}
+  内積の形にして，あとは具体的に計算：
+  \begin{equation}
+    B(x, x)
+    = \inner{x}{Cx}
+    = (\textrm{右辺}).
+  \end{equation}
+\end{proof}
+
+\begin{lemma}
+  \label{lem:inner_self_comp_sq}
+  \lean{inner_self_comp_sq}
+  \leanok
+  任意の$x \in \Z^8$に対し，平方完成すると次のようになる：
+  \begin{equation}
+    \begin{split}
+      B(x, x) ={}& \left( \sqrt{2} \, x_0 - \sqrt{\frac{1}{2}} \, x_2 \right)^2 + \left( \sqrt{2} \, x_1 - \sqrt{\frac{1}{2}} \, x_3 \right)^2 + \left( \sqrt{\frac{3}{2}} \, x_2 - \sqrt{\frac{2}{3}} \, x_3 \right)^2 \\
+      & + \left( \sqrt{\frac{5}{6}} \, x_3 - \sqrt{\frac{6}{5}} \, x_4 \right)^2 + \left( \sqrt{\frac{4}{5}} \, x_4 - \sqrt{\frac{5}{4}} \, x_5 \right)^2 + \left( \sqrt{\frac{3}{4}} \, x_5 - \sqrt{\frac{4}{3}} \, x_6 \right)^2 \\
+      & + \left( \sqrt{\frac{2}{3}} \, x_6 - \sqrt{\frac{3}{2}} \, x_7 \right)^2 + \frac{1}{2} \, x_7^2
+    \end{split}
+  \end{equation}
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  \uses{lem:inner_self_calc}
+  左辺に補題~\ref{lem:inner_self_calc}を代入して計算すれば得られる．
+\end{proof}
+
+\begin{theorem}
+  \label{thm:add_inner}
+  \lean{add_inner}
+  \leanok
+  $\forall x, y, z \in \Z^8,\ \inner{x + y}{z}_{\Z} = \inner{x}{z}_{\Z} + \inner{y}{z}_{\Z}$.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  \uses{def:B}
+  計算するだけ．
+\end{proof}
+
+\begin{theorem}
+  \label{thm:inner_sym}
+  \lean{inner_sym}
+  \leanok
+  $\forall x, y \in \Z^8,\ \inner{x}{y}_{\Z} = \inner{y}{z}_{\Z}$.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  \uses{def:B}
+  計算するだけ．
+\end{proof}
+
+\begin{theorem}
+  \label{thm:inner_self}
+  \lean{inner_self}
+  \leanok
+  $\forall x \in \Z^8,\ \inner{x}{x}_{\Z} \ge 0$.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  \uses{lem:inner_self_comp_sq}
+  補題~\ref{lem:inner_self_comp_sq}より，$\inner{x}{x}_{\Z}$は平方の和で表せるから成り立つ．
+\end{proof}
+
+\begin{theorem}
+  \label{thm:inner_self_eq_zero}
+  \lean{inner_self_eq_zero}
+  \leanok
+  $\forall x \in \Z^8,\ \inner{x}{x}_{\Z} = 0 \implies x = 0$.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  \uses{lem:inner_self_comp_sq}
+  補題~\ref{lem:inner_self_comp_sq}より，$\inner{x}{x}_{\Z}$は平方の和で表せ，$= 0$とすると各項が$0$である．
+  よって，最後の項に注目すると，$x_7 = 0$である．
+  したがって，最後から2番目の項に注目すると，$x_6 = 0$である．
+  これを繰り返すと，$x_0 = \cdots = x_7 = 0$を得る．
+\end{proof}
+
+\begin{theorem}
+  \label{thm:even}
+  \lean{even}
+  \leanok
+  $\forall x \in \Z^8,\ \inner{x}{x}_{\Z} = 0 \implies x = 0$.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  \uses{lem:inner_self_calc}
+  補題~\ref{lem:inner_self_calc}より従う．
+\end{proof}

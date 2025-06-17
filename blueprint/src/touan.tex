@@ -1,0 +1,184 @@
+\documentclass[unicode,11pt]{ltjsarticle}
+\usepackage{luatexja}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathcomp,empheq,bm,enumitem,url,tikz,graphicx,color,tcolorbox,listings,newverbs,hhline,multirow}
+\usepackage[no-math]{fontspec}
+
+\usetikzlibrary{intersections,calc,angles,quotes}
+
+% 和文のフォントをIPAexに
+\usepackage[no-math,deluxe,ipaex]{luatexja-preset}
+
+% ハイパーリンクの設定
+\usepackage[pdfencoding=auto]{hyperref}
+
+% ttfamily (タイプライタ)のフォントを変更
+\setmonofont{Menlo}
+
+\theoremstyle{definition}
+\newtheorem{defi}{定義}[section]
+\newtheorem{thm}[defi]{定理}
+\newtheorem{prop}[defi]{命題}
+\newtheorem{lem}[defi]{補題}
+\newtheorem{cor}[defi]{系}
+\newtheorem{rem}[defi]{注意}
+\newtheorem{exa}[defi]{例}
+\newtheorem{exe}[defi]{演習}
+\newtheorem{fac}[defi]{事実}
+\newtheorem{que}{問題}
+\newtheorem{ans}{解答}
+\newtheorem*{defi*}{定義}
+\newtheorem*{thm*}{定理}
+\newtheorem*{prop*}{命題}
+\newtheorem*{lem*}{補題}
+\newtheorem*{cor*}{系}
+\newtheorem*{rem*}{注意}
+\newtheorem*{exa*}{例}
+\newtheorem*{exe*}{演習}
+\newtheorem*{fac*}{事実}
+\newtheorem*{hosoku*}{補足}
+
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\map}[2]{#1 \rightarrow #2}
+\newcommand{\set}[2]{\left\lbrace #1 \mathrel{} \middle| \mathrel{} #2 \right\rbrace}
+\newcommand{\ddv}[2]{\dfrac{d #1}{d #2}}
+\newcommand{\dpdv}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\dsum}{\displaystyle \sum}
+\newcommand{\dlim}{\displaystyle \lim}
+\newcommand{\dint}{\displaystyle \int}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\transpose}[1]{{}^t\!#1}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\M}{\operatorname{M}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\ann}[1]{\operatorname{Ann}\, ({#1})}
+\newcommand{\Co}{\operatorname{Co}}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+
+% figureのキャプションをsectionに関連づける
+\counterwithin{figure}{section}
+
+% 式番号をsectionと関連づける
+\numberwithin{equation}{section}
+
+% 数式番号を参照されたもののみ表示
+\mathtoolsset{showonlyrefs=true}
+
+% 証明環境の見出しを日本語に
+\def\proofname{\textbf{証明}}
+
+% 証明環境の再定義
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+\pushQED{\qed}%
+\normalfont \topsep6\p@\@plus6\p@\relax
+\trivlist
+\item\relax
+{\bfseries
+#1\@addpunct{\textbf{.}}}\hspace\labelsep\ignorespaces
+}{
+\popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+% 証明環境の最後を黒四角に
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% 脚注番号をアラビア数字に
+\renewcommand{\thefootnote}{\arabic{footnote}}
+
+% 大きい行列を扱うため
+\setcounter{MaxMatrixCols}{24}
+
+\title{レポート(有限鏡映群)}
+\author{苗代 昇(学生番号: 20243029)}
+\date{}
+
+\begin{document}
+\maketitle
+
+ここでは内積を$\inner{\cdot}{\cdot}$と書く．
+
+\begin{ans}
+\begin{proof}
+  $\lambda, \mu \in V$とし，$\lambda = c_\lambda \alpha + \beta_\lambda,\ \mu = c_\mu \alpha + \beta_\mu$と書く($c_\lambda, c_\mu \in \R,\ \beta_\lambda, \beta_\mu \in H_\alpha$)．
+  このとき，
+  \begin{align}
+    \inner{s_\alpha(\lambda)}{s_\alpha(\mu)}
+    &= \inner{s_\alpha(c_\lambda \alpha + \beta_\lambda)}{s_\alpha(c_\mu \alpha + \beta_\mu)}\\
+    &= \inner{-c_\lambda \alpha + \beta_\lambda}{-c_\mu \alpha + \beta_\mu}\\
+    &= c_\lambda c_\mu \inner{\alpha}{\alpha} - c_\lambda \inner{\alpha}{\beta_\mu} - c_\mu \inner{\beta_\lambda}{\alpha} + \inner{\beta_\lambda}{\beta_\mu}\\
+    &= c_\lambda c_\mu \inner{\alpha}{\alpha} + \inner{\beta_\lambda}{\beta_\mu}.
+  \end{align}
+  一方，
+  \begin{align}
+    \inner{\lambda}{\mu}
+    &= \inner{c_\lambda \alpha + \beta_\lambda}{c_\mu \alpha + \beta_\mu}\\
+    &= c_\lambda c_\mu \inner{\alpha}{\alpha} + c_\lambda \inner{\alpha}{\beta_\mu} + c_\mu \inner{\alpha}{\beta_\lambda} + \inner{\beta_\lambda}{\beta_\mu}\\
+    &= c_\lambda c_\mu \inner{\alpha}{\alpha} + \inner{\beta_\lambda}{\beta_\mu}.
+  \end{align}
+  よって，$\inner{s_\alpha(\lambda)}{s_\alpha(\mu)} = \inner{\lambda}{\mu}$が成り立つから，$s_\alpha$は直交変換であることわかった．
+\end{proof}
+\end{ans}
+
+\begin{ans}
+  \begin{proof}
+    (1)を確かめる：
+    \begin{equation}
+      f(\alpha)
+      = \alpha - 2 \frac{\inner{\alpha}{\alpha}}{\inner{\alpha}{\alpha}} \alpha
+      = \alpha - 2\alpha
+      = -\alpha.
+    \end{equation}
+    (2)を確かめる．$\lambda \in H_\alpha$とすると，$\inner{\lambda}{\alpha} = 0$であるから，
+    \begin{equation}
+      f(\lambda)
+      = \lambda - 2\frac{\inner{\lambda}{\alpha}}{\inner{\alpha}{\alpha}} \alpha
+      = \lambda - (2 \cdot 0) \alpha
+      = \lambda.
+    \end{equation}
+    以上より，$s_\alpha = f$である．
+  \end{proof}
+\end{ans}
+
+\begin{ans}
+  $\inner{\alpha}{\beta_1} = \inner{\alpha}{\beta_2} = 0$であるから
+  \begin{equation}
+    \begin{pmatrix}
+      s_\alpha(\alpha) & s_\alpha(\beta_1) & s_\alpha(\beta_2)
+    \end{pmatrix}
+    = \begin{pmatrix}
+      -\alpha & \beta_1 & \beta_2
+    \end{pmatrix}
+    = \begin{pmatrix}
+      \alpha & \beta_1 & \beta_2
+    \end{pmatrix}
+    \begin{pmatrix}
+      -1 & 0 & 0\\
+      0 & 1 & 0\\
+      0 & 0 & 1
+    \end{pmatrix}
+  \end{equation}
+  である．
+  よって，$\{\alpha, \beta_1, \beta_2\}$に関する$s_\alpha$の表現行列は$\begin{pmatrix}
+    -1 & 0 & 0\\
+    0 & 1 & 0\\
+    0 & 0 & 1
+  \end{pmatrix}$である．
+\end{ans}
+
+\end{document}
