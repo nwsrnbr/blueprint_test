@@ -1,1 +1,1 @@
-import Project.Example
+import NewProject.Example
