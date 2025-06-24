@@ -9,7 +9,7 @@
 \section{section1}
 \begin{definition}
   \label{def:E8Lattice}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice}
+  \lean{E8Lattice}
   \leanok
   \uses{def:IntegralLattice}
   $E_8$格子とは，integralLatticeであって，even unimodularかつランクが$8$であるもののことである．
@@ -17,7 +17,7 @@
 
 \begin{theorem}
   \label{thm:unique}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.unique}
+  \lean{E8Lattice.unique}
   \leanok
   2つの$E_8$格子$\Lambda_1,\ \Lambda_2$は同型である．
 \end{theorem}
@@ -28,7 +28,7 @@
 
 \begin{definition}
   \label{def:M0-M7}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.M0}
+  \lean{E8Lattice.M0}
   \leanok
   $E_8$のCartan行列を$M_0$，それを1行ずつ行基本変形していき(その過程の行列を$M_1, M_2, \ldots, M_6$とする)上三角にしたものを$M_7$とする：
   \begin{gather}
@@ -59,7 +59,7 @@
 
 \begin{lemma}
   \label{lem:M7_upperTrianglar}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.M7_upperTrianglar}
+  \lean{E8Lattice.M7_upperTrianglar}
   \leanok
   $M_7$は上三角である．
 \end{lemma}
@@ -72,7 +72,7 @@
 
 \begin{lemma}
   \label{lem:M7_det}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.M7_det}
+  \lean{E8Lattice.M7_det}
   \leanok
   $\det M_7 = 1$である．
 \end{lemma}
@@ -90,7 +90,7 @@
 
 \begin{theorem}
   \label{thm:E8_det}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.E8_det}
+  \lean{E8Lattice.E8_det}
   \leanok
   $E_8$のCartan行列の行列式は$1$である．
 \end{theorem}
@@ -110,7 +110,7 @@
 
 \begin{definition}
   \label{def:B}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.B}
+  \lean{E8Lattice.B}
   \leanok
   $B$を$E_8$のCartan行列$C (= M_0) \in \M_8(\Z)$から定まる双線型形式とする：
   \begin{equation}
@@ -120,7 +120,7 @@
 
 \begin{lemma}
   \label{lem:inner_self_calc}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.inner_self_calc}
+  \lean{E8Lattice.inner_self_calc}
   \leanok
   任意の$x \in \Z^8$に対し，次が成り立つ：
   \begin{equation}
@@ -144,7 +144,7 @@
 
 \begin{lemma}
   \label{lem:inner_self_comp_sq}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.inner_self_comp_sq}
+  \lean{E8Lattice.inner_self_comp_sq}
   \leanok
   任意の$x \in \Z^8$に対し，平方完成すると次のようになる：
   \begin{equation}
@@ -164,7 +164,7 @@
 
 \begin{theorem}
   \label{thm:add_inner}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.add_inner}
+  \lean{E8Lattice.add_inner}
   \leanok
   $\forall x, y, z \in \Z^8,\ B(x+y, z) = B(x, z) + B(y, z)$.
 \end{theorem}
@@ -177,7 +177,7 @@
 
 \begin{theorem}
   \label{thm:inner_sym}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.inner_sym}
+  \lean{E8Lattice.inner_sym}
   \leanok
   $\forall x, y \in \Z^8,\ B(x, y) = B(y, x)$.
 \end{theorem}
@@ -190,7 +190,7 @@
 
 \begin{theorem}
   \label{thm:inner_self}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.inner_self}
+  \lean{E8Lattice.inner_self}
   \leanok
   $\forall x \in \Z^8,\ B(x, x) \ge 0$.
 \end{theorem}
@@ -203,7 +203,7 @@
 
 \begin{theorem}
   \label{thm:inner_self_eq_zero}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.inner_self_eq_zero}
+  \lean{E8Lattice.inner_self_eq_zero}
   \leanok
   $\forall x \in \Z^8,\ B(x, x) = 0 \implies x = 0$.
 \end{theorem}
@@ -219,7 +219,7 @@
 
 \begin{theorem}
   \label{thm:even}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.even}
+  \lean{E8Lattice.even}
   \leanok
   $\forall x \in \Z^8,\ 2 \mid \inner{x}{x}_{\Z}$.
 \end{theorem}
@@ -232,7 +232,7 @@
 
 \begin{theorem}
   \label{thm:unimodular}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.unimodular}
+  \lean{E8Lattice.unimodular}
   \leanok
   $E_8$格子はunimodularである．
 \end{theorem}
@@ -243,7 +243,7 @@
 
 \begin{theorem}
   \label{thm:exists_E8}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.exists_E8}
+  \lean{E8Lattice.exists_E8}
   \leanok
   $E_8$格子は存在する．
 \end{theorem}
@@ -262,7 +262,7 @@
 
 \begin{lemma}
   \label{lem:card_norm_2}
-  \lean{Project.IntegralLattice.E8.Basic.E8Lattice.card_norm_2}
+  \lean{E8Lattice.card_norm_2}
   \leanok
   $E_8$格子$\Lambda$に対し，$\#\set{x \in \Lambda}{B(x, x) = 2} = 240$.
 \end{lemma}
